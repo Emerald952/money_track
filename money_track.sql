@@ -85,11 +85,11 @@ ALTER SEQUENCE public.category_category_id_seq OWNED BY public.categories.catego
 
 CREATE TABLE public.transactions (
     transaction_id integer NOT NULL,
+    amount numeric(10,2) NOT NULL,
     description text,
     type character varying(10) NOT NULL,
     category_id integer,
-    transaction_date date DEFAULT CURRENT_DATE NOT NULL,
-    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    transaction_date date DEFAULT now() NOT NULL,
     CONSTRAINT transactions_type_check CHECK (((type)::text = ANY ((ARRAY['Income'::character varying, 'Expense'::character varying])::text[])))
 );
 
